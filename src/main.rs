@@ -88,10 +88,10 @@ fn main() {
     });
 
     let buff_2 = std::fs::read(file_2).unwrap_or_else(|err| {
-        eprintln!("Error occurred while opening file 1: {err}");
+        eprintln!("Error occurred while opening file 2: {err}");
         process::exit(1);
     });
-
+  
     let diff = cmp_files(&buff_1, &buff_2, n_skip);
 
     println!("Bitdiff: {diff}");
