@@ -72,4 +72,6 @@ fn main() {
     let diff = cmp_files(&buff_1, &buff_2);
 
     println!("Bitdiff: {diff}");
+    println!("Bitdiff / len(file_1): {}", diff as f64 / (buff_1.len() * u8::BITS as usize) as f64);
+    println!("Bitdiff / len(file_2): {}", diff as f64 / (buff_2.len() * u8::BITS as usize) as f64);
 }
