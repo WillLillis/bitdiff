@@ -30,22 +30,27 @@ if args.f:
     with open(first, 'rb') as f:
         first_bin = f.read()
         first = first_bin.hex()
-        print(first)
+        #print(first)
     with open(second, 'rb') as f:
         second_bin = f.read()
         second = second_bin.hex()
-        print(second)
+        #print(second)
 
 offset = 8 * args.s
 
 aa = bytearray.fromhex(first)
 bb = bytearray.fromhex(second)
 
-aa_bin = bin(int.from_bytes(aa, "big"))[offset:]
-bb_bin = bin(int.from_bytes(bb, "big"))[offset:]
+aa_bin = bin(int.from_bytes(aa, "big")).split("0b")[1][offset:]
+bb_bin = bin(int.from_bytes(bb, "big")).split("0b")[1][offset:]
+
 
 larger_len = max(len(aa_bin), len(bb_bin))
 aa_bin = aa_bin.zfill(larger_len)
 bb_bin = bb_bin.zfill(larger_len)
+# print(aa_bin)
+# print(bb_bin)
 
-print(sum([1 if i != j else 0 for i, j in zip(aa_bin, bb_bin)]))
+diff = sum([1 if i != j else 0 for i, j in zip(aa_bin, bb_bin)])
+print(f"# Diff: {diff}, % len: {100.0 * diff / larger_len}")
+
